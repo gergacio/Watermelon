@@ -13,5 +13,6 @@ urlpatterns = [
     # token as membership card - check for user info
     path("user/token/refresh/", TokenRefreshView.as_view()), #  get refresh token from http://127.0.0.1:8000/api/v1/user/token/  and pass it  http://127.0.0.1:8000/api/v1/user/token/refresh/
     path("user/register/", api_views.RegisterView.as_view()), # http://127.0.0.1:8000/api/v1/user/register/
+    path("user/password-reset/<email>/", api_views.PasswordResetEmailVerifyAPIView.as_view()),
 
 ]
