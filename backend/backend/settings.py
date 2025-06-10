@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders', # let us to make call from external apps (react axios for example)
     'anymail', # sending emails 
+    'drf_yasg', # api documentation
   
 ]
 
