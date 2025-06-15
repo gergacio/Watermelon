@@ -3,7 +3,9 @@ from django.shortcuts import render
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
+
 from api import serializer as api_serializer
+from api import models as api_models
 from userauths.models import User, Profile
 
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -80,6 +82,7 @@ class PasswordResetEmailVerifyAPIView(generics.RetrieveAPIView):
         return user    
     
 class PasswordChangeAPIView(generics.CreateAPIView):
+
     permission_classes = [AllowAny]
     serializer_class = api_serializer.UserSerializer
 
@@ -97,3 +100,23 @@ class PasswordChangeAPIView(generics.CreateAPIView):
             return Response({"message": "Password Changed Successfully"}, status=status.HTTP_201_CREATED)
         else:
             return Response({"message": "User Does Not Exists"}, status=status.HTTP_404_NOT_FOUND)
+        
+class CategoryListAPIView(generics.ListAPIView):  
+    queryset = api_models.Category.objects.filter(active=True)  
+    serializer_class = api_serializer.CategorySerializer
+    permission_classes = [AllowAny]
+
+class CourseListAPIView(generics.ListAPIView):
+    queryset = api_models.Course.objects.filter(platform_status="Published", teacher_course_status="Published")
+    serializer_class = api_serializer.CourseSerializer
+    permission_classes = [AllowAny]
+# access course by slug instead of id, so pass slug in url
+class CourseDetailAPIView(generics.RetrieveDestroyAPIView):
+    serializer_class = api_serializer.CourseSerializer
+    permission_classes = [AllowAny]
+
+    def get_object(self):
+        slug = self.kwargs['slug']
+        return api_models.Course.objects.get(slug=slug)
+
+

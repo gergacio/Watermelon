@@ -15,6 +15,11 @@ urlpatterns = [
     path("user/register/", api_views.RegisterView.as_view()), # http://127.0.0.1:8000/api/v1/user/register/
     path("user/password-reset/<email>/", api_views.PasswordResetEmailVerifyAPIView.as_view()),
     path("user/password-change/", api_views.PasswordChangeAPIView.as_view()),
+
+    # core endpoints
+    path("course/category/", api_views.CategoryListAPIView.as_view()),
+    path("course/course-list/", api_views.CourseListAPIView.as_view()),
+    path("course/course-detail/<slug>/", api_views.CourseDetailAPIView.as_view()),
     
    
 
