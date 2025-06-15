@@ -7,6 +7,7 @@ import Register from "../src/views/auth/Register";
 import Login from "../src/views/auth/Login";
 import Logout from "../src/views/auth/Logout";
 import ForgotPassword from "../src/views/auth/ForgotPassword";
+import CreateNewPassword from "../src/views/auth/CreateNewPassword";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login/" element={<Login />} />
           <Route path="/logout/" element={<Logout />} />
           <Route path="/forgot-password/" element={<ForgotPassword />} />
+          <Route path="/create-new-password/" element={<CreateNewPassword />} />
         </Routes>
       </MainWrapper>
     </BrowserRouter>
