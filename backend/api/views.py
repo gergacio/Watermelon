@@ -301,4 +301,10 @@ class CreateOrderAPIView(generics.CreateAPIView):
         order.save()
 
         return Response({"message": "Order Created Successfully", "order_oid": order.oid}, status=status.HTTP_201_CREATED)
+    
+class CheckoutAPIView(generics.RetrieveAPIView):
+    serializer_class = api_serializer.CartOrderSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = api_models.CartOrder.objects.all()
+    lookup_field = 'oid'    
 
